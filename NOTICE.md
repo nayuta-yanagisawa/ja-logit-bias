@@ -16,13 +16,6 @@ The token counts (`data/*/ja-counts.npz`, `data/*/zh-counts.npz`,
 Wikipedia's contributors under CC BY-SA 4.0. This repository holds no
 Wikipedia text, only counts of how often each token occurs.
 
-## DeepSeek
-
-The token ids in `data/deepseek-v4.1-flash/` refer to the tokenizer of
-DeepSeek-V4.1-Flash (`deepseek-ai/DeepSeek-V4.1-Flash` on Hugging Face). The
-patch in `strata/` changes Strata (https://github.com/Niko1221/Strata) and is
-under the MIT License of this repository.
-
 ## Qwen
 
 The token ids in `data/qwen3.8-flash-next/` refer to the tokenizer of

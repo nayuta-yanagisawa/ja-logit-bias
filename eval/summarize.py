@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Recomputes the README's evaluation table from the answers and Codex's judgements in eval/results/.
+"""Recomputes the evaluation tables of eval/README.md from the answers and Codex's judgements in eval/results/.
 
-    python3 eval/summarize.py [RESULTS_DIR]      (default eval/results; eval/deepseek/results for DeepSeek)
+    python3 eval/summarize.py [RESULTS_DIR]      (default eval/results)
 
 An answer made only of a tool call (the model, under a coding agent's system prompt, wrote a file instead of
 replying) has no prose to judge, so it is left out of every count, and so is a comparison that holds one.
@@ -20,7 +20,7 @@ R = pathlib.Path(sys.argv[1]) if len(sys.argv) > 1 else HERE / "results"
 PROMPTS = json.loads((HERE / "prompts.json").read_text(encoding="utf-8"))
 PUNCT = set("：:？！，；?!,;")
 ORDER = ["none", "system-prompt", "char-rule", "bias", "bias-minp0.05", "bias-minp0.1", "bias-minp0.05-temp0.7",
-         "earlier-minp0.05", "rule-a-minp0.05"]
+         "earlier-minp0.05", "none-v0.2.12", "system-prompt-v0.2.12", "current-minp0.05"]
 
 
 def prose(text):
@@ -48,6 +48,7 @@ pairs = [json.loads(l) for l in (R / "codex-pairs.jsonl").read_text(encoding="ut
 print("Reading (answers with prose only)")
 print(f"{'round':>5} {'condition':24} {'prose':>5} {'Chinese':>8} {'non-China':>10} {'odd':>9} {'odd items':>9}")
 odd_of = {}
+zh_of = {}
 for rnd in sorted({x["round"] for x in reads}):
     for cond in [c for c in ORDER if any(x["cond"] == c and x["round"] == rnd for x in reads)]:
         rows = [x for x in reads if x["round"] == rnd and x["cond"] == cond and answers[(cond, x["prompt"], x["rep"])]]
@@ -57,20 +58,24 @@ for rnd in sorted({x["round"] for x in reads}):
         odd = [x for x in rows if x["odd"]]
         for x in rows:
             odd_of[(rnd, cond, x["prompt"], x["rep"])] = bool(x["odd"])
+            zh_of[(rnd, cond, x["prompt"], x["rep"])] = bool(real(x["zh"]))
         print(f"{rnd:>5} {cond:24} {len(rows):>5} {len(zh):>3} ({100 * len(zh) / len(rows):2.0f}%) "
               f"{len(nczh):>3}/{len(nc):<3}({100 * len(nczh) / len(nc):2.0f}%) {len(odd):>3} ({100 * len(odd) / len(rows):2.0f}%) "
               f"{sum(len(x['odd']) for x in rows):>9}")
 
-print("\nOdd wording, same request and repetition, within a round (only-A / only-B, sign test)")
-for rnd, a, b in [(1, "none", "bias"), (1, "none", "char-rule"), (2, "bias", "bias-minp0.05"), (2, "bias", "bias-minp0.1"),
-                  (3, "bias-minp0.05", "bias-minp0.05-temp0.7"),
-                  (4, "earlier-minp0.05", "rule-a-minp0.05")]:
-    keys = [(p, r) for (rr, c, p, r) in odd_of if rr == rnd and c == a and (rnd, b, p, r) in odd_of]
-    if not keys:
-        continue
-    oa = sum(odd_of[(rnd, a, p, r)] and not odd_of[(rnd, b, p, r)] for p, r in keys)
-    ob = sum(odd_of[(rnd, b, p, r)] and not odd_of[(rnd, a, p, r)] for p, r in keys)
-    print(f"  round {rnd} {a} vs {b}: only {a} {oa}, only {b} {ob}, p = {sign_p(oa, ob):.3f} ({len(keys)} pairs)")
+PAIRS = [(1, "none", "bias"), (1, "none", "system-prompt"), (1, "none", "char-rule"), (2, "bias", "bias-minp0.05"),
+         (2, "bias", "bias-minp0.1"), (3, "bias-minp0.05", "bias-minp0.05-temp0.7"),
+         (4, "earlier-minp0.05", "current-minp0.05"), (5, "none-v0.2.12", "current-minp0.05"),
+         (5, "none-v0.2.12", "system-prompt-v0.2.12")]
+for title, of in (("Chinese", zh_of), ("Odd wording", odd_of)):
+    print(f"\n{title}, same request and repetition, within a round (only-A / only-B, sign test)")
+    for rnd, a, b in PAIRS:
+        keys = [(p, r) for (rr, c, p, r) in of if rr == rnd and c == a and (rnd, b, p, r) in of]
+        if not keys:
+            continue
+        oa = sum(of[(rnd, a, p, r)] and not of[(rnd, b, p, r)] for p, r in keys)
+        ob = sum(of[(rnd, b, p, r)] and not of[(rnd, a, p, r)] for p, r in keys)
+        print(f"  round {rnd} {a} vs {b}: only {a} {oa}, only {b} {ob}, p = {sign_p(oa, ob):.3f} ({len(keys)} pairs)")
 
 print("\nBlind comparison (pairs where both answers have prose)")
 groups = collections.defaultdict(lambda: collections.Counter())

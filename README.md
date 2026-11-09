@@ -1,108 +1,28 @@
 # ja-logit-bias
 
-中国系のオープンな LLM は、日本語の回答に中国語を混ぜることがあります。このリポジトリは、それを推論時に止める `logit_bias` を作ります。モデルの再学習は要りません。混ざる中国語には 2 種類あります。
+LLMs trained on large amounts of Chinese, such as Qwen, sometimes mix Chinese into Japanese answers. Japanese and Chinese share many kanji tokens, and the model drifts from one language into the other: it writes 検査 in its Simplified form 检查, or writes a Chinese word in characters Japanese shares, 序号 for 連番 or 可以 for できる. This repository holds a `logit_bias` for Qwen3.8-Flash-Next that keeps such tokens from being generated, with no retraining of the model.
 
-- 簡体字：「検査」を「检查」と書くような混ざり方です。
-- 日本語と共通の漢字で書いた中国語の語：「連番」を「序号」と書く、「できる」を「可以」と書くような混ざり方です。
+The list is `data/qwen3.8-flash-next/logit_bias.json`. Its token ids are those of Qwen3.8-Flash-Next's tokenizer, so it fits any build of that model that keeps the tokenizer, whatever the quantization. No other model is covered: the scripts accept another tokenizer, but no list for one has been built or evaluated.
 
-Qwen3.8-Flash-Next 用と DeepSeek-V4.1-Flash 用にできあがったものが、`data/qwen3.8-flash-next/logit_bias.json` と `data/deepseek-v4.1-flash/logit_bias.json` にあります。ほかのモデルの分は、`build.sh` で作れます。
+## Effect
 
-## 仕組み
+The list was evaluated where it is meant to be used, in a coding agent. Qwen3.8-Flash-Next answered 56 Japanese requests, each asked twice, under the system prompt of [Pi](https://pi.dev), a coding agent for the terminal. The requests cover technical explanations, code, business writing, casual chat, translation, formal essays and questions about China. OpenAI's gpt-6.1-sol, run through Codex, then read every answer without knowing which condition produced it, and listed the Chinese in it and its odd wording: wording that is neither Chinese nor natural Japanese, such as a wrong kanji, a garbled word or an English word in place of a Japanese one.
 
-禁止するトークンを 2 つの規則で選び、それぞれに -100 の bias を付けます。多くのサーバーでは、-100 はそのトークンを出さないことを意味します。
-
-### 文字の規則
-
-JIS X 0208 にない漢字を含むトークンを、すべて禁止します。JIS X 0208 は、ふつうの日本語の文章が使う文字の範囲です。2010 年の常用漢字のうち、JIS X 0208 にない 4 字（𠮟 塡 剝 頰）は禁止しません。
-
-これで「检」「们」「这」のような簡体字が出なくなります。モデルはその代わりに、日本語の字体（検、達）を選びます。
-
-線を JIS X 0213 に引かないのは、JIS X 0213 の第 3・第 4 水準に、簡体字がたくさん入っているためです（开 关 么 种 など）。
-
-### 語の規則
-
-簡体字を禁止しても、「序号」「可以」のように、日本語にもある字で書いた中国語は残ります。そこで、漢字だけでできたトークン（1 字以上、すべて JIS X 0208 の字）を、日本語版と中国語版のウィキペディアで数え比べます。
-
-- 日本語：日本語版ウィキペディアの、日本語の文に出てくる回数です。ひらがなが 5 字以上あり、かつ 1 割以上を占める行を日本語の文とみなします。これで、記事の中に単独で置かれた中国語の名前や引用を数えずに済みます。
-- 中国語：中国語版ウィキペディアの、中国語の文に出てくる回数です。漢字が 5 字以上あり、仮名を含まない行を中国語の文とみなします。
-
-日本語の文で 1 億トークンあたり 10 回未満で、中国語の文に 1 回でも出てくるトークンを禁止します。許可リストも、字数による例外もありません。どのトークンを禁止するかは、数えた回数だけで決まります。Qwen3.8-Flash-Next では 17,330 個になります（2 字以上 16,902、1 字 428）。日本語の 10 回は、手で日本語と中国語に分けた 89 語（日本語 50、中国語 39）で選んだ値です。
-
-1 字のトークンも数えるのは、中国語の語の一部が 1 字ずつのトークンで書かれるためです。「个」「从」「网」「气」のように、JIS X 0208 に入っている簡体字は、文字の規則では止まりません。
-
-#### 許可リストを置かない理由
-
-以前の規則は、2 字以上のトークンだけを対象にしていました。中国語の文に 5 回以上出てくることも条件で、そこから許可リストの語を除いていました。許可リストは、日本語で 1 億トークンあたり 1 回以上 10 回未満の語を、Claude と Codex が別々に判定して作ったものです。この判定は、判定者でぶれました。たとえば Codex は帯の 9 割を日本語と判定し、その中には「真的」「下周」のような中国語も含まれていました。辞書でも代わりになりません。JMdict には、中国語と判定した語のうち 315 語（当前、智能、最后 など）が載っています。
-
-いまの規則では、以前の許可リストの語のうち、Qwen の語彙にある 862 語（摘要、河流、塑造 など）も禁止になります。そのうち 831 語（96%）は、禁止していない 1 字ずつのトークンで書けます。ただ、モデルがそう書くとは限りません（「限界」の節）。
-
-### 日本語への影響
-
-Qwen3.8-Flash-Next の禁止リストが日本語版ウィキペディアの日本語の文で触れるトークンは、0.0198% です（文字の規則 0.0036%、語の規則 0.0162%）。以前の規則では 0.0135% でした。中国語版ウィキペディアの中国語の文では、23% に触れます。
-
-禁止するのはトークンであって、文字列ではありません。禁止した語も、モデルが 1 字ずつのトークンで書くことはできます。ただ、学習のときに見慣れない分け方なので、出にくくはなります。
-
-## Qwen3.8-Flash-Next での評価
-
-Qwen3.8-Flash-Next（IQ3_S の量子化、Strata v0.2.10）で、日本語の依頼 56 本（`eval/prompts.json`）を 2 回ずつ答えさせました。依頼の分野は、技術の説明、コードレビュー、業務の文章、雑談・創作、翻訳・要約、中国が話題の依頼、論説です。システムプロンプトは端末で動くコーディングエージェント Pi のもので、思考は `medium`、サンプリングはモデルカードの値（温度 1.0、top_p 0.95、top_k 20）です。
-
-下の表の「この logit_bias」は、以前の規則で作った禁止リスト（40,130 トークン）です。いまの規則との比較は、表のあとにあります。
-
-回答はすべて、OpenAI の gpt-6.1-sol（Codex、推論の強さ high）に、どの条件の回答かを伏せて読ませました。中国語の語や字が混ざった箇所と、中国語ではないが不自然な日本語の箇所を挙げさせています。句読点の「：」「？」は日本語でも使うので、数えていません。システムプロンプトがコーディングエージェントのものなので、条件ごとに 6〜12 本の回答が、文章を書かずにファイルを書き込むツール呼び出しになりました。これらは読む文章がないので、数から除いています。
-
-| 条件 | 中国語を含む回答（中国が話題の依頼を除く） | 不自然な箇所を含む回答 |
+| Condition | Answers with Chinese, requests about China left out | Answers with odd wording |
 |---|---|---|
-| 何もしない | 34/87（39%） | 49/103（48%） |
-| システムプロンプトで「中国語を混ぜるな」と指示 | 29/89（33%） | 47/105（45%） |
-| 文字の規則だけ | 23/87（26%） | 57/103（55%） |
-| 文字の規則＋語の規則（この logit_bias） | 5〜7/90（6〜8%） | 61〜65/106（58〜61%） |
-| この logit_bias＋min_p 0.05 | 6/85（7%） | 48〜51/101（48〜50%） |
-| この logit_bias＋min_p 0.1 | 5/84（6%） | 50/100（50%） |
-| この logit_bias＋min_p 0.05＋温度 0.7 | 2/87（2%） | 44/103（43%） |
+| Nothing | 30/85 (35%) | 55/101 (54%) |
+| System prompt says "do not mix in Chinese" | 34/87 (39%) | 50/103 (49%) |
+| This list, with `min_p` 0.05 | 3/87 (3%) | 46/103 (45%) |
 
-幅のある行は、ほかの条件と同じ回で比べるために 2 回読ませた条件です。判定は 4 回に分けて行い、比べるのは同じ回の中どうしです（`eval/README.md`）。
+The counts leave out answers that were only a tool call writing a file (9 to 11 of 112 per condition), since they hold no prose. The Chinese column also leaves out the 16 answers to requests about China, some of which ask for Chinese.
 
-- **中国語の混入は 5 分の 1 になりました。** システムプロンプトでの指示は、ほとんど効きませんでした。
-- **品質は落ちませんでした。** 同じ依頼への「何もしない」と「この logit_bias」の回答を、どちらかを伏せて比べさせたところ、この logit_bias の 52 勝 44 敗 7 引き分けでした。日本語の自然さだけで比べると、49 勝 41 敗 13 引き分けです。
-- **副作用として、不自然な箇所が増えます。** 中国語にそれかけた場面で、中国語のトークンを禁止すると、モデルは日本語に戻らずに、英語や崩れた語を書くことがあります（「監視社会化と privacy の侵害」）。同じ依頼で比べて、この logit_bias だけが不自然だった組は 26、何もしないときだけが不自然だった組は 12 でした（符号検定で p = 0.034）。
-- **min_p 0.05 で、この副作用を抑えられます。** 不自然な箇所を含む回答は、何もしないときと同じ水準に戻りました。日本語の自然さの比較でも、min_p 0.05 が 50 勝 34 敗 16 引き分けと上でした（p = 0.10）。min_p 0.1 でも同じ向きです（50 勝 31 敗、p = 0.045）。中国語の混入は変わりません。
-- **温度を 0.7 に下げると、どの数字もわずかによくなりました。** ただ、差はどれも偶然の範囲（p = 0.27〜0.84）で、モデルカードの推奨（1.0）から外れるほどの根拠にはなりません。
-- **速度は変わりませんでした。** 生成の速さは、禁止なしで 86.8 tok/s、この logit_bias で 86.5 tok/s でした。禁止リストの受け渡しにかかる時間も、測れるほどではありません。
+The list removed nearly all the Chinese. Pairing the two conditions' answers to the same request and the same asking, 33 pairs had Chinese only without the list and none only with it (sign test p < 0.001). The instruction in the system prompt made no measurable difference: 18 pairs each way. Odd wording did not become more common with the list: 20 pairs had it only without the list and 10 only with it (p = 0.10). The three answers that kept Chinese held 案例 spelled one kanji per token, 茑屋書店 and 給與.
 
-### いまの規則との比較
+Pi's system prompt holds the evaluator's local paths and instructions and is not published, so the evaluation cannot be repeated exactly. The setup, every condition measured, the paired tests and the data are in [`eval/README.md`](eval/README.md).
 
-以前の規則のリストと、いまの規則のリスト（42,125 トークン）で、同じ 56 本の依頼に 2 回ずつ答えさせました。どちらにも min_p 0.05 を付け、サーバーは Strata v0.2.12 です。回答は混ぜて、どちらの回答かを伏せて Codex に読ませています。
+## Usage
 
-| 条件 | 中国語を含む回答 | 同じ、中国が話題の依頼を除く | 不自然な箇所を含む回答 |
-|---|---|---|---|
-| 以前の規則＋min_p 0.05 | 6/105（6%） | 2/89（2%） | 57/105（54%） |
-| いまの規則＋min_p 0.05 | 8/103（8%） | 3/87（3%） | 44/103（43%） |
-
-- **中国語の混入は変わりませんでした。** 同じ依頼で比べて、片方だけに中国語があった組は、以前の規則 4、いまの規則 6 です（p = 0.75）。いまの規則で漏れた中国語は、ほとんどが中国が話題の依頼でのものでした。そのほかは、日本語でも 1 億トークンあたり 10 回以上使う語（科技、信心）と、禁止した語を 1 字ずつ書いたもの（案例）です。
-- **不自然な箇所は減りましたが、偶然の範囲です。** 片方だけが不自然だった組は、以前の規則 26、いまの規則 15 でした（p = 0.12）。
-
-依頼と、全条件の回答、Codex の判定は `eval/` にあります。
-
-## DeepSeek-V4.1-Flash での評価
-
-DeepSeek-V4.1-Flash-1017（ISTA-DASLab の IQ2_XXS、Strata v0.2.7 に `strata/` のパッチ）でも、同じ 56 本の依頼を 1 回ずつ答えさせ、Codex に同じように読ませました。DeepSeek は長く考えて長く書くので、どの条件にも、システムプロンプトに簡潔さを求める一文を足し、思考の上限を 2,048 トークンにしています。
-
-| 条件 | 簡体字（1,000 字あたり） | 中国語を含む回答（中国が話題の依頼を除く） | 不自然な箇所を含む回答 |
-|---|---|---|---|
-| 何もしない | 1.00 | 2/47（4%） | 5/55（9%） |
-| この logit_bias | 0.07 | 1/47（2%） | 8/55（15%） |
-| この logit_bias＋min_p 0.05 | 0.00 | 2/47（4%） | 4/55（7%） |
-
-- **DeepSeek は、何もしなくても中国語をほとんど混ぜません。** 簡体字が出た 6 本は、すべて中国が話題の依頼でした（腾讯、华为云、豆瓣酱 など）。
-- **この logit_bias が効くのは、その中国が話題の依頼です。** 簡体字の企業名や料理名が、日本語の字体か繁体字で書かれるようになりました。ほかの依頼では、中国語の混入は変わりません。
-- **品質は落ちませんでした。** この logit_bias＋min_p 0.05 と何もしないときの比較は、26 勝 25 敗 4 引き分けでした。日本語の自然さだけでは、21 勝 14 敗 20 引き分けです。
-- **Qwen と同じく、min_p とセットで使ってください。** logit_bias だけだと、不自然な箇所が少し増えます。
-
-禁止するのは 25,286 トークンです（文字の規則 15,338、語の規則 9,948）。DeepSeek の分は以前の規則（2 字以上、中国語 5 回以上、許可リストあり）で作ったもので、いまの規則では作り直していません。DeepSeek はもう使っていないためです。作ったときのスクリプトと許可リストは、コミット 7f4cc54 にあります。回答と判定は `eval/deepseek/` にあります。
-
-## 使い方
-
-`logit_bias` を OpenAI 形式（`{"トークン ID": -100, ...}`）で受け付けるサーバーなら、リクエストに足すだけで使えます。
+A server that takes an OpenAI-style `logit_bias` (`{"token id": -100, ...}`) needs only that field added to the request:
 
 ```python
 import json, urllib.request
@@ -112,62 +32,75 @@ body = {
     "model": "qwen3.8-flash-next",
     "messages": [{"role": "user", "content": "冪等性とは何か説明してください。"}],
     "logit_bias": bias,
-    "min_p": 0.05,  # 禁止で増える不自然な語を抑える（評価）。OpenAI の API にはない項目
+    "min_p": 0.05,
 }
 req = urllib.request.Request("http://localhost:8080/v1/chat/completions", data=json.dumps(body).encode(),
                              headers={"Content-Type": "application/json"})
 print(json.load(urllib.request.urlopen(req))["choices"][0]["message"]["content"])
 ```
 
-手元で確かめたのは、[Strata](https://github.com/Niko1221/Strata) で動かした Qwen3.8-Flash-Next だけです。
+The list holds 42,125 tokens, 670 KB of JSON that goes with every request. On [Strata](https://github.com/Niko1221/Strata), the inference server used here, it hardly slows generation: decoding ran at 80.5 tok/s with the list and 82.8 without, while single requests ranged from 65 to 94 tok/s, and the list added a few milliseconds to each request.
 
-- Strata：v0.2.10 の CUDA の構成の Qwen のエンジンで、`logit_bias` が使えることを確かめました。DeepSeek のエンジンは、v0.2.7 に `strata/` のパッチを当てると使えます（パッチなしでは受け付けません）。
-- Pi（端末で動くコーディングエージェント）：`models.json` で、モデルの `samplingParams` に `"logit_bias": {...}` と `"min_p": 0.05` を書くと、毎回のリクエストに付きます。
-- llama.cpp：文書によると、`/completion` は同じ OpenAI 形式の `logit_bias` を受け付けます。`/v1/chat/completions` での扱いは確かめていません。
-- vLLM、SGLang：ソースと文書では、OpenAI 形式の `logit_bias` を受け付けます。試してはいません。
-- Ollama：`logit_bias` を受け付けないので、使えません。
+`min_p` 0.05 is part of the measured setup, but it is not in OpenAI's API, and some servers do not take it. The list without it has not been measured. An earlier, smaller version of the list without `min_p` made odd wording more common than no ban (only the banned answer was odd in 26 pairs, only the unbanned one in 12, p = 0.034): where the model starts to drift into Chinese, the ban can push it into English or a garbled word instead. With `min_p` 0.05 such answers were fewer, 16 pairs against 26, though within chance (p = 0.16).
 
-禁止リストは、Qwen3.8-Flash-Next 用が 42,125 トークン（JSON で 670 KB）、DeepSeek-V4.1-Flash 用が 25,286 トークン（390 KB）です。これが毎回のリクエストに乗ります。
+The list has been used only with Strata v0.2.10 and v0.2.12, serving Qwen3.8-Flash-Next. In Pi, put `"logit_bias": {...}` and `"min_p": 0.05` in the model's `samplingParams` in `~/.pi/agent/models.json`. llama.cpp, vLLM and SGLang take an OpenAI-style `logit_bias` according to their documentation or source, but have not been tried. Ollama does not take `logit_bias`.
 
+## The banned tokens
 
-## ほかのモデルの分を作る
+Two rules choose the tokens, and each gets a bias of -100, which most servers treat as "never generate". The list follows from a character set, token counts from Wikipedia and the fixed settings below; no word on it was chosen by hand.
 
-トークン ID は、モデルのトークナイザごとに違います。別のモデルに使うには、そのトークナイザで作り直します。
+### The character rule
+
+A token is banned when it contains a kanji outside JIS X 0208, the character set of ordinary Japanese text. The four jōyō kanji of 2010 that JIS X 0208 lacks (𠮟 塡 剝 頰) stay allowed. This removes Simplified forms such as 检 and 们, and the model writes Japanese instead (検, 達). It bans 24,795 tokens.
+
+The larger Japanese set JIS X 0213 is not used, because its third and fourth levels include many Simplified forms (开 关 么 种 and others).
+
+### The word rule
+
+Chinese written in characters Japanese shares, such as 序号 and 可以, passes the character rule. So every token made only of kanji within JIS X 0208, one kanji or more, is counted in Japanese and in Chinese Wikipedia. A token is banned when it occurs under 10 times per 100 million tokens of Japanese sentences and at least once in Chinese sentences. This bans 17,330 tokens: 16,902 of two or more kanji and 428 single kanji.
+
+- Japanese sentences are lines of Japanese Wikipedia in which hiragana make up at least five characters and at least a tenth of the line. This leaves out Chinese names and quotations standing alone on a line.
+- Chinese sentences are lines of Chinese Wikipedia with five or more ideographs and no kana.
+- The threshold of 10 was set by hand.
+
+Single kanji are included because some Simplified forms are inside JIS X 0208 (个 从 网 气), and Chinese words are sometimes written one kanji per token.
+
+### Cost to Japanese
+
+Of the tokens in Japanese Wikipedia's Japanese sentences, 0.0198% are banned (character rule 0.0036%, word rule 0.0162%); of those in Chinese Wikipedia's Chinese sentences, 23%. The ban is on tokens, not on strings, so a banned word can still be spelled with smaller tokens, though the model seldom does (see Limits).
+
+## Limits
+
+- Simplified Chinese cannot be written: no translation into Chinese, no quotation, not even a greeting such as 谢谢.
+- Rare Japanese words can become unwritable. In a quick check in Pi, outside the evaluation, the model was asked to write three banned words, 摘要, 塑造 and 蚯蚓; it wrote 要約, "to shape" and a wrong kanji, 螻, instead of spelling them one kanji per token.
+- Characters that Japanese uses 10 or more times per 100 million tokens are not banned even as single-kanji tokens. They include Traditional forms such as 從 數 點 寫 and characters of Chinese words such as 爬, so the Chinese word 爬行者 can still be written as 爬 + 行者. The same goes for Chinese words that Japanese uses now and then, such as 科技.
+- A Simplified character with no token of its own cannot be banned, because it is spelled with byte tokens shared with other characters. Asked for rainy-day plans in Tokyo, the model wrote the bookstore 蔦屋書店 as 茑屋書店 in 6 of 14 answers with a ban, as often as without one (4 of 8).
+- Chinese renderings of foreign names written in shared characters pass, such as 麦肯吉 for McKinsey.
+- The ban keeps the model from writing Chinese, not from drifting toward it. Where it drifts, it may write English or a garbled word instead.
+
+## Rebuilding the list
 
 ```sh
 pip install -r requirements.txt
-./build.sh <Hugging Face のリポジトリ> <名前>
-./build.sh Qwen/Qwen3.8-Flash-Next qwen3.8-flash-next   # 例
+./build.sh Qwen/Qwen3.8-Flash-Next qwen3.8-flash-next
 ```
 
-`build.sh` は、モデルの `tokenizer.json` と、2023 年 11 月 1 日版の日本語版・中国語版ウィキペディア（合わせて約 5.4 GB）を落とし、トークンを数えて `data/<名前>/` に書きます。数えるのは 8 スレッドで 10 分ほどです。
+`build.sh` downloads the model's `tokenizer.json` and writes `data/qwen3.8-flash-next/`. It reuses the token counts already there when they were made with the same `tokenizer.json`; otherwise it downloads the 2023-11-01 dumps of Japanese and Chinese Wikipedia (about 5.4 GB together) and counts them, which takes about 10 minutes on 8 threads. To try another threshold, run the last two commands of `build.sh` by hand, with `--ja` on `make_zh_words.py`.
 
-規則に人の判定は入らないので、別のトークナイザでもそのまま作れます。ただ、効果と副作用は、そのモデルで評価してから使ってください（`eval/README.md`）。
+Another model would need its own list, since token ids differ between tokenizers. `./build.sh <Hugging Face repository> <name>` builds one the same way, but whether the rules work for that model, and what they cost it, has to be measured there (`scripts/eval.py`, [`eval/README.md`](eval/README.md)).
 
-## 限界
+## Files
 
-- **簡体字の中国語は書けなくなります。** 中国語の翻訳や、中国語の文の引用はできません。中国語の挨拶「谢谢」のような簡体字も書けません。
-- **まれな日本語の語は書けなくなることがあります。** 日本語で 1 億トークンあたり 10 回未満の語は、中国語に一度でも出てくれば禁止します。禁止した語を漢字で書くよう頼んでも、モデルは 1 字ずつのトークンでは書かず、別の語か英語に言い換えました（「摘要」が「要約」に、「塑造」が to shape に）。違う字を書くこともあります（「蚯蚓」の代わりに「螻」）。
-- **日本語でもある程度使う字は、1 字のトークンでも禁止できません。** 日本語で 1 億トークンあたり 10 回以上出てくる旧字体・繁体字（從 數 點 寫）や、中国語の語の字（爬）です。そのため、「爬行者」は「爬」＋「行者」のトークンで書けてしまいます。
-- **1 字分のトークンがない簡体字は、すり抜けることがあります。** その字はバイト単位のトークンの組み合わせで書かれ、バイト単位のトークンはほかの字と共有されているので、禁止できません。評価では、448 本のうち 1 本で「蔦屋書店」が「茑屋書店」になりました。
-- **日本語と共通の字だけでできた中国語の固有名詞は通ります。** 「麦肯吉」（マッキンゼー）、「微訊」（WeChat）のような音訳です。
-- **禁止した中国語は、英語に置き換わることがあります。** 中国語にそれること自体は止められないためです。min_p で減らせますが、なくなりはしません。
-- **評価したのは Qwen3.8-Flash-Next と DeepSeek-V4.1-Flash だけです。** ほかのモデルでの効果と副作用は確かめていません。
-
-## ファイル
-
-| パス | 中身 |
+| Path | Contents |
 |---|---|
-| `scripts/count_corpus.py` | ウィキペディアの文のトークンを数える |
-| `scripts/make_zh_words.py` | 数えた結果から、禁止する中国語の語を選ぶ |
-| `scripts/make_bias.py` | 文字の規則と語の一覧から、`logit_bias` を作る |
-| `scripts/eval.py` | 日本語の依頼を投げ、回答の中国語を数える |
-| `build.sh` | 上の 3 本を、ダウンロードから通して流す |
-| `data/qwen3.8-flash-next/` | Qwen3.8-Flash-Next の頻度、禁止する語、`logit_bias.json` |
-| `data/deepseek-v4.1-flash/` | DeepSeek-V4.1-Flash の同じもの |
-| `strata/` | Strata v0.2.7 の DeepSeek のエンジンに `logit_bias` を通すパッチ |
-| `eval/` | 評価の依頼と結果（DeepSeek の分は `eval/deepseek/`） |
+| `build.sh` | downloads the inputs, then runs `count_corpus.py`, `make_zh_words.py` and `make_bias.py` |
+| `scripts/count_corpus.py` | counts the tokens in Wikipedia's sentences |
+| `scripts/make_zh_words.py` | chooses the tokens the word rule bans |
+| `scripts/make_bias.py` | writes the `logit_bias` from the character rule and the word list |
+| `scripts/eval.py` | sends the Japanese requests to a server and collects the answers |
+| `data/qwen3.8-flash-next/` | Qwen3.8-Flash-Next's token counts, banned words and `logit_bias.json` |
+| `eval/` | the evaluation: requests, answers, readings, timings, and `summarize.py`, which recomputes the figures |
 
-## ライセンス
+## License
 
-スクリプトは MIT License、データは CC BY 4.0 です。頻度はウィキペディアから数えたもので、トークン ID は Qwen のトークナイザのものです。詳しくは `NOTICE.md` にあります。
+The scripts are under the MIT License and the data under CC BY 4.0. The counts come from Wikipedia, and the token ids are those of Qwen's tokenizer. `NOTICE.md` has the details.

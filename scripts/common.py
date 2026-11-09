@@ -30,7 +30,7 @@ def jis_ok(c):
 def token_texts(tokenizer_json):
     """Maps each token id to the text it stands for, or None when the token holds only part of a character.
 
-    Decoding token by token through the tokenizer's own decoder works for byte-level BPE (Qwen, DeepSeek) and for
+    Decoding token by token through the tokenizer's own decoder works for byte-level BPE (Qwen's) and for
     SentencePiece-style vocabularies alike. A partial UTF-8 sequence decodes to U+FFFD.
     """
     from tokenizers import Tokenizer
