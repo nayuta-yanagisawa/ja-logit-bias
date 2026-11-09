@@ -43,8 +43,8 @@ def token_texts(tokenizer_json):
 
 
 def kanji_word(text):
-    """A token text the word rule judges: two or more kanji, all of them allowed by the character rule."""
-    return len(text) >= 2 and all(is_han(c) and jis_ok(c) for c in text)
+    """A token text the word rule judges: one or more kanji, all of them allowed by the character rule."""
+    return len(text) >= 1 and all(is_han(c) and jis_ok(c) for c in text)
 
 
 def file_sha256(path):

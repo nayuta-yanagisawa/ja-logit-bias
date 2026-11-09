@@ -19,7 +19,8 @@ HERE = pathlib.Path(__file__).resolve().parent
 R = pathlib.Path(sys.argv[1]) if len(sys.argv) > 1 else HERE / "results"
 PROMPTS = json.loads((HERE / "prompts.json").read_text(encoding="utf-8"))
 PUNCT = set("：:？！，；?!,;")
-ORDER = ["none", "system-prompt", "char-rule", "bias", "bias-minp0.05", "bias-minp0.1", "bias-minp0.05-temp0.7"]
+ORDER = ["none", "system-prompt", "char-rule", "bias", "bias-minp0.05", "bias-minp0.1", "bias-minp0.05-temp0.7",
+         "earlier-minp0.05", "rule-a-minp0.05"]
 
 
 def prose(text):
@@ -62,7 +63,8 @@ for rnd in sorted({x["round"] for x in reads}):
 
 print("\nOdd wording, same request and repetition, within a round (only-A / only-B, sign test)")
 for rnd, a, b in [(1, "none", "bias"), (1, "none", "char-rule"), (2, "bias", "bias-minp0.05"), (2, "bias", "bias-minp0.1"),
-                  (3, "bias-minp0.05", "bias-minp0.05-temp0.7")]:
+                  (3, "bias-minp0.05", "bias-minp0.05-temp0.7"),
+                  (4, "earlier-minp0.05", "rule-a-minp0.05")]:
     keys = [(p, r) for (rr, c, p, r) in odd_of if rr == rnd and c == a and (rnd, b, p, r) in odd_of]
     if not keys:
         continue

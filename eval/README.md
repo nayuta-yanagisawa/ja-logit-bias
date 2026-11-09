@@ -7,7 +7,7 @@
 `prompts.json` の日本語の依頼 56 本を、条件ごとに 2 回ずつ答えさせました（各 112 本）。
 
 - モデル：Qwen3.8-Flash-Next の IQ3_S（ISTA-DASLab の GSQ-RCO 版）
-- サーバー：Strata v0.2.10。下書きのモデル DFlash2 を使っています。
+- サーバー：Strata v0.2.10（`earlier-minp0.05` と `rule-a-minp0.05` は v0.2.12）。下書きのモデル DFlash2 を使っています。
 - 思考：`reasoning_effort` は `medium` です。
 - サンプリング：モデルカードの値です（温度 1.0、top_p 0.95、top_k 20）。
 - システムプロンプト：端末で動くコーディングエージェント Pi が送るものです。このリポジトリには入れていません。
@@ -20,10 +20,12 @@
 | `none.json` | 何もしない |
 | `system-prompt.json` | システムプロンプトの末尾に、次の英文の指示を足す |
 | `char-rule.json` | 文字の規則だけの logit_bias（24,795 トークン） |
-| `bias.json` | `data/qwen3.8-flash-next/logit_bias.json`（40,130 トークン） |
+| `bias.json` | 以前の規則の logit_bias（40,130 トークン、コミット 7f4cc54 の `data/qwen3.8-flash-next/logit_bias.json`） |
 | `bias-minp0.05.json` | 同じ logit_bias に、`min_p` 0.05 |
 | `bias-minp0.1.json` | 同じ logit_bias に、`min_p` 0.1 |
 | `bias-minp0.05-temp0.7.json` | 同じ logit_bias に、`min_p` 0.05 と温度 0.7 |
+| `earlier-minp0.05.json` | 以前の規則の logit_bias に `min_p` 0.05、Strata v0.2.12 |
+| `rule-a-minp0.05.json` | いまの規則の logit_bias（42,125 トークン）に `min_p` 0.05、Strata v0.2.12 |
 
 システムプロンプトに足した指示は、次のとおりです。
 
@@ -44,13 +46,14 @@ DeepSeek-V4.1-Flash の回答は `deepseek/results/` にあります。DeepSeek-
 - 読み取り（`results/codex-reading.jsonl`）：回答ごとに、中国語の語や字の箇所（`zh`）と、中国語ではないが不自然な日本語の箇所（`odd`）を挙げさせました。
 - 比較（`results/codex-pairs.jsonl`）：同じ依頼への 2 つの回答を、どちらの条件かを伏せて並べ、全体としてよいほう（`better`）と、日本語として自然なほう（`japanese`）を選ばせました。
 
-判定は 3 回に分けて行いました。`round` がその回です。
+判定は 4 回に分けて行いました。`round` がその回です。
 
 | 回 | 読み取り | 比較 |
 |---|---|---|
 | 1 | `none`、`system-prompt`、`char-rule`、`bias` | `none` 対 `bias` |
 | 2 | `bias`、`bias-minp0.05`、`bias-minp0.1` | `bias` 対 `bias-minp0.05`、`bias` 対 `bias-minp0.1` |
 | 3 | `bias-minp0.05`、`bias-minp0.05-temp0.7` | `bias-minp0.05` 対 `bias-minp0.05-temp0.7` |
+| 4 | `earlier-minp0.05`、`rule-a-minp0.05` | なし |
 
 `bias` は 1 回目と 2 回目に、`bias-minp0.05` は 2 回目と 3 回目に読ませています。同じ回答への判定は、回をまたいでもほぼ同じでした（不自然な箇所を含む回答は、`bias` が 65 本と 61 本、`bias-minp0.05` が 48 本と 51 本）。
 

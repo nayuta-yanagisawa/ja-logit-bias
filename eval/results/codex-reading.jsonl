@@ -1006,3 +1006,227 @@
 {"round": 3, "cond": "bias-minp0.05-temp0.7", "prompt": 53, "rep": 1, "zh": [], "odd": ["의사결정", "示る"]}
 {"round": 3, "cond": "bias-minp0.05-temp0.7", "prompt": 54, "rep": 1, "zh": [], "odd": ["社会保障給billing費"]}
 {"round": 3, "cond": "bias-minp0.05-temp0.7", "prompt": 55, "rep": 1, "zh": [], "odd": ["図式よく描かれます"]}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 0, "rep": 0, "zh": [], "odd": ["的心配"]}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 0, "rep": 1, "zh": ["？", "？", "？"], "odd": ["使うしかないと"]}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 1, "rep": 0, "zh": [], "odd": ["ビゾIBILITYマップ"]}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 1, "rep": 1, "zh": [], "odd": ["乱読", "順読"]}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 2, "rep": 0, "zh": [], "odd": ["攻撃surface"]}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 2, "rep": 1, "zh": [], "odd": []}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 3, "rep": 0, "zh": ["："], "odd": []}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 3, "rep": 1, "zh": [], "odd": ["しばし", "ゲスク量子化"]}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 4, "rep": 0, "zh": [], "odd": []}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 4, "rep": 1, "zh": ["："], "odd": ["colllapse"]}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 5, "rep": 0, "zh": ["：", "：", "：", "：", "：", "："], "odd": []}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 5, "rep": 1, "zh": ["：", "：", "：", "：", "：", "："], "odd": ["型系統", "マーカー_traits", "型系統"]}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 6, "rep": 0, "zh": [], "odd": ["牛ではなく家畜として"]}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 6, "rep": 1, "zh": ["？", "："], "odd": []}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 7, "rep": 0, "zh": ["！", "："], "odd": ["いとうせい"]}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 7, "rep": 1, "zh": ["扣減"], "odd": ["いとうせい"]}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 8, "rep": 0, "zh": ["：", "：", "：", "：", "：", "：", "：", "：", "：", "：", "：", "：", "："], "odd": ["バリアント", "バリアント", "ペナル項", "勾配降降下", "汎用", "バリアント"]}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 8, "rep": 1, "zh": [], "odd": []}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 9, "rep": 0, "zh": ["：", "："], "odd": ["ヒアマップ", "marke request"]}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 9, "rep": 1, "zh": [], "odd": ["位置ずずれ"]}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 10, "rep": 0, "zh": [], "odd": ["作リ"]}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 10, "rep": 1, "zh": [], "odd": []}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 11, "rep": 0, "zh": ["：", "：", "：", "：", "：", "：", "：", "：", "：", "："], "odd": ["擦過回数", "擦過回数", "擦過"]}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 11, "rep": 1, "zh": ["：", "：", "：", "：", "：", "：", "："], "odd": []}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 12, "rep": 0, "zh": [], "odd": []}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 12, "rep": 1, "zh": [], "odd": []}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 13, "rep": 0, "zh": [], "odd": ["ループ反動"]}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 13, "rep": 1, "zh": [], "odd": ["ループ反動"]}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 14, "rep": 0, "zh": [], "odd": ["インデックス内の見直し"]}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 14, "rep": 1, "zh": [], "odd": []}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 15, "rep": 0, "zh": ["："], "odd": []}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 15, "rep": 1, "zh": [], "odd": []}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 16, "rep": 0, "zh": [], "odd": []}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 16, "rep": 1, "zh": [], "odd": []}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 17, "rep": 0, "zh": [], "odd": []}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 17, "rep": 1, "zh": [], "odd": []}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 18, "rep": 0, "zh": [], "odd": ["薄テスト"]}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 18, "rep": 1, "zh": ["：", "：", "："], "odd": ["habit"]}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 19, "rep": 0, "zh": [], "odd": []}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 19, "rep": 1, "zh": [], "odd": []}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 20, "rep": 0, "zh": ["："], "odd": ["要件"]}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 20, "rep": 1, "zh": [], "odd": ["いたただきたく"]}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 21, "rep": 0, "zh": ["：", "：", "：", "："], "odd": ["プレースホルダー入れています", "所属マネージャー加え"]}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 21, "rep": 1, "zh": ["："], "odd": []}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 22, "rep": 0, "zh": [], "odd": []}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 22, "rep": 1, "zh": [], "odd": []}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 23, "rep": 0, "zh": [], "odd": []}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 23, "rep": 1, "zh": [], "odd": []}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 24, "rep": 0, "zh": [], "odd": []}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 24, "rep": 1, "zh": [], "odd": ["開封前"]}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 25, "rep": 0, "zh": ["：", "：", "："], "odd": []}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 25, "rep": 1, "zh": [], "odd": []}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 26, "rep": 0, "zh": [], "odd": ["also"]}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 26, "rep": 1, "zh": ["：", "：", "："], "odd": []}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 27, "rep": 0, "zh": [], "odd": ["received"]}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 27, "rep": 1, "zh": [], "odd": []}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 28, "rep": 0, "zh": [], "odd": []}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 28, "rep": 1, "zh": [], "odd": ["sunshineぎらぎら"]}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 29, "rep": 0, "zh": ["麻布台之丘", "茑屋書店"], "odd": [".teamLab", "thread", "食物販", ".escape room"]}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 29, "rep": 1, "zh": [], "odd": ["팁"]}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 30, "rep": 0, "zh": [], "odd": ["みちくし", "震っていた", "yearsが経ち"]}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 30, "rep": 1, "zh": [], "odd": ["歩きついていく"]}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 31, "rep": 0, "zh": [], "odd": ["光起こし時計"]}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 31, "rep": 1, "zh": [], "odd": ["シケドユール"]}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 32, "rep": 0, "zh": [], "odd": ["三首", "なごりのつきの月", "ひと瞬間", "三首"]}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 32, "rep": 1, "zh": [], "odd": ["三首", "栗の弾", "くりのたん", "栗の弾", "三首"]}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 33, "rep": 0, "zh": [], "odd": []}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 33, "rep": 1, "zh": [], "odd": []}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 34, "rep": 0, "zh": [], "odd": ["方向的に鈍感な"]}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 34, "rep": 1, "zh": [], "odd": ["こちらがお願いです"]}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 35, "rep": 0, "zh": ["：", "？", "？", "？"], "odd": ["七色の混ぜた色", "レイleigh散乱"]}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 35, "rep": 1, "zh": ["？", "！", "？"], "odd": ["レイleigh散乱"]}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 36, "rep": 0, "zh": [], "odd": []}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 36, "rep": 1, "zh": [], "odd": []}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 37, "rep": 0, "zh": [], "odd": []}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 37, "rep": 1, "zh": [], "odd": []}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 38, "rep": 0, "zh": [], "odd": []}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 38, "rep": 1, "zh": [], "odd": []}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 39, "rep": 0, "zh": [], "odd": []}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 39, "rep": 1, "zh": [], "odd": []}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 40, "rep": 0, "zh": [], "odd": []}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 40, "rep": 1, "zh": [], "odd": []}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 41, "rep": 0, "zh": [], "odd": []}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 41, "rep": 1, "zh": [], "odd": []}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 42, "rep": 0, "zh": [], "odd": []}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 42, "rep": 1, "zh": [], "odd": []}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 43, "rep": 0, "zh": [], "odd": ["穴のあいていない狸の皮算用", "目に玉を吊るして算用する"]}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 43, "rep": 1, "zh": [], "odd": ["藪（やぶ）が先か牛が先か", "煮る前に鯛を数えるな", "朝の三石（さんこく）は夕の三石にあらず", "朝の三石は夕の三石にあらず"]}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 44, "rep": 0, "zh": ["上有天堂、下有蘇杭"], "odd": []}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 44, "rep": 1, "zh": [], "odd": []}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 45, "rep": 0, "zh": ["："], "odd": ["デleveraging"]}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 45, "rep": 1, "zh": ["科技自立"], "odd": ["共通富裕", "SEMI産業", "中立的分見"]}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 46, "rep": 0, "zh": [], "odd": ["起ち上げ"]}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 46, "rep": 1, "zh": [], "odd": ["翰躬尽瘁"]}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 47, "rep": 0, "zh": [], "odd": ["勾配", "ポッカ酢", "本店", "東京ollar"]}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 47, "rep": 1, "zh": ["：", "猪肉", "："], "odd": ["皿の上が皮から削ぎ"]}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 48, "rep": 0, "zh": [], "odd": []}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 48, "rep": 1, "zh": [], "odd": []}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 49, "rep": 0, "zh": ["：", "：", "：", "：", "：", "：", "：", "："], "odd": ["シェ管理シェ"]}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 49, "rep": 1, "zh": ["：", "：", "：", "：", "：", "：", "：", "：", "？"], "odd": ["ありがとう（nǐ hǎo）", "連声調変化"]}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 50, "rep": 0, "zh": [], "odd": ["再帰った"]}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 50, "rep": 1, "zh": [], "odd": []}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 51, "rep": 0, "zh": ["：", "："], "odd": ["宮原眼病慈善義堂", "コミッド", "メゾン・デ・ポー", "メゾン・デ・ポー"]}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 51, "rep": 1, "zh": ["：", "：", "：", "：", "：", "：", "：", "：", "：", "：", "：", "：", "：", "：", "：", "：", "文青", "：", "：", "：", "：", "：", "：", "：", "：", "：", "：", "：", "：", "：", "："], "odd": ["九분", "白北投石", "汲み出し式", "nationals village", "ファゲリー", "sun milk（太陽のパン）", "リピーション", "猫族文化村"]}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 52, "rep": 0, "zh": [], "odd": []}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 52, "rep": 1, "zh": [], "odd": []}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 53, "rep": 0, "zh": [], "odd": []}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 53, "rep": 1, "zh": ["：", "：", "：", "："], "odd": []}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 54, "rep": 0, "zh": [], "odd": ["現物賦課方式", "多病床化"]}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 54, "rep": 1, "zh": [], "odd": ["純負", "traditionalな"]}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 55, "rep": 0, "zh": [], "odd": ["法的ハードウェア化", "ホルヘル"]}
+{"round": 4, "cond": "earlier-minp0.05", "prompt": 55, "rep": 1, "zh": [], "odd": ["コリングリフト", "制御の落伍"]}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 0, "rep": 0, "zh": ["？", "？"], "odd": []}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 0, "rep": 1, "zh": [], "odd": []}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 1, "rep": 0, "zh": ["：", "：", "："], "odd": ["シーケンススキャン"]}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 1, "rep": 1, "zh": [], "odd": ["集計", "原因の切り分けやすくなります"]}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 2, "rep": 0, "zh": [], "odd": []}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 2, "rep": 1, "zh": [], "odd": []}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 3, "rep": 0, "zh": [], "odd": []}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 3, "rep": 1, "zh": ["：", "："], "odd": []}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 4, "rep": 0, "zh": ["："], "odd": []}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 4, "rep": 1, "zh": ["："], "odd": []}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 5, "rep": 0, "zh": [], "odd": ["論空状態", "에만"]}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 5, "rep": 1, "zh": [], "odd": []}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 6, "rep": 0, "zh": [], "odd": []}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 6, "rep": 1, "zh": [], "odd": []}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 7, "rep": 0, "zh": [], "odd": []}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 7, "rep": 1, "zh": [], "odd": ["いとうとうせい"]}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 8, "rep": 0, "zh": [], "odd": ["バリアン", "バリアン", "バリアン", "バリアン", "ペナル項", "バリアン", "バリアン"]}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 8, "rep": 1, "zh": ["："], "odd": ["変種した"]}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 9, "rep": 0, "zh": [], "odd": []}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 9, "rep": 1, "zh": [], "odd": ["各自の論点"]}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 10, "rep": 0, "zh": [], "odd": []}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 10, "rep": 1, "zh": [], "odd": ["公開鍵暗方式"]}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 11, "rep": 0, "zh": ["：", "：", "：", "："], "odd": ["팁", ".constant"]}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 11, "rep": 1, "zh": ["：", "：", "：", "：", "：", "：", "："], "odd": ["擦過回数"]}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 12, "rep": 0, "zh": [], "odd": []}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 12, "rep": 1, "zh": ["案例"], "odd": []}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 13, "rep": 0, "zh": [], "odd": []}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 13, "rep": 1, "zh": [], "odd": []}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 14, "rep": 0, "zh": [], "odd": []}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 14, "rep": 1, "zh": [], "odd": []}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 15, "rep": 0, "zh": ["："], "odd": []}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 15, "rep": 1, "zh": [], "odd": []}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 16, "rep": 0, "zh": [], "odd": []}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 16, "rep": 1, "zh": [], "odd": []}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 17, "rep": 0, "zh": [], "odd": []}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 17, "rep": 1, "zh": [], "odd": []}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 18, "rep": 0, "zh": [], "odd": []}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 18, "rep": 1, "zh": [], "odd": ["テストが走られなくなる"]}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 19, "rep": 0, "zh": ["：", "：", "："], "odd": []}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 19, "rep": 1, "zh": [], "odd": []}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 20, "rep": 0, "zh": [], "odd": []}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 20, "rep": 1, "zh": [], "odd": ["ancak"]}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 21, "rep": 0, "zh": ["：", "："], "odd": []}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 21, "rep": 1, "zh": ["：", "：", "：", "："], "odd": []}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 22, "rep": 0, "zh": [], "odd": []}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 22, "rep": 1, "zh": [], "odd": []}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 23, "rep": 0, "zh": [], "odd": []}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 23, "rep": 1, "zh": [], "odd": []}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 24, "rep": 0, "zh": ["：", "：", "：", "："], "odd": []}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 24, "rep": 1, "zh": [], "odd": []}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 25, "rep": 0, "zh": ["：", "："], "odd": ["ごサービス", "まずも", "前月への変更"]}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 25, "rep": 1, "zh": ["："], "odd": []}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 26, "rep": 0, "zh": [], "odd": ["1日1レビュー以内"]}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 26, "rep": 1, "zh": [], "odd": []}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 27, "rep": 0, "zh": [], "odd": []}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 27, "rep": 1, "zh": [], "odd": ["メース"]}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 28, "rep": 0, "zh": [], "odd": []}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 28, "rep": 1, "zh": [], "odd": []}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 29, "rep": 0, "zh": [], "odd": ["半日〜丸の内在室型"]}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 29, "rep": 1, "zh": ["茑屋書店"], "odd": []}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 30, "rep": 0, "zh": ["？"], "odd": ["一体"]}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 30, "rep": 1, "zh": [], "odd": ["二匹"]}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 31, "rep": 0, "zh": [], "odd": []}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 31, "rep": 1, "zh": ["："], "odd": []}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 32, "rep": 0, "zh": [], "odd": ["三首", "とんぼcue", "ゆウトンボ"]}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 32, "rep": 1, "zh": [], "odd": ["三首", "一首", "三首"]}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 33, "rep": 0, "zh": [], "odd": ["台場"]}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 33, "rep": 1, "zh": ["：", "："], "odd": ["3日続けても自炊しなくても", "自炊断絶"]}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 34, "rep": 0, "zh": ["？", "！", "！"], "odd": ["おグラス"]}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 34, "rep": 1, "zh": [], "odd": []}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 35, "rep": 0, "zh": ["？", "！", "？", "？", "？", "？"], "odd": ["にじじゅんRemember", "ちいさちいさな"]}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 35, "rep": 1, "zh": [], "odd": ["_wave length_"]}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 36, "rep": 0, "zh": [], "odd": []}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 36, "rep": 1, "zh": [], "odd": []}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 37, "rep": 0, "zh": [], "odd": []}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 37, "rep": 1, "zh": [], "odd": []}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 38, "rep": 0, "zh": [], "odd": []}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 38, "rep": 1, "zh": [], "odd": []}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 39, "rep": 0, "zh": [], "odd": []}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 39, "rep": 1, "zh": [], "odd": []}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 40, "rep": 0, "zh": [], "odd": []}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 40, "rep": 1, "zh": [], "odd": []}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 41, "rep": 0, "zh": [], "odd": []}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 41, "rep": 1, "zh": [], "odd": []}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 42, "rep": 0, "zh": [], "odd": []}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 42, "rep": 1, "zh": [], "odd": []}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 43, "rep": 0, "zh": [], "odd": []}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 43, "rep": 1, "zh": ["：", "："], "odd": ["まだ捕まらぬタネを数えるな", "まだ捕まらぬタネを数えるな", "まだ捕まらぬタネを数えるな"]}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 44, "rep": 0, "zh": ["科技"], "odd": ["上天堂"]}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 44, "rep": 1, "zh": [], "odd": []}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 45, "rep": 0, "zh": ["平台企業", "信心", "共同富有", "房子不該炒", "韌性"], "odd": ["_COMMON_ 富裕"]}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 45, "rep": 1, "zh": [], "odd": []}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 46, "rep": 0, "zh": ["：", "挟天子以令諸侯", "：", "：", "：", "：", "：", "：", "：", "："], "odd": []}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 46, "rep": 1, "zh": [], "odd": ["織席・売り草履"]}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 47, "rep": 0, "zh": [], "odd": ["_alive", "しょうりゅうぼう", "専用的", "焼きduck一枚"]}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 47, "rep": 1, "zh": ["正宗"], "odd": ["湯（熱々）", "18枚以上の折り目", "것이", "あっさりじた"]}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 48, "rep": 0, "zh": ["華爲"], "odd": ["阿里巴児"]}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 48, "rep": 1, "zh": [], "odd": ["クラウド computing", "微訊"]}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 49, "rep": 0, "zh": [], "odd": ["「」と「」"]}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 49, "rep": 1, "zh": ["：", "：", "：", "：", "：", "：", "："], "odd": []}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 50, "rep": 0, "zh": [], "odd": ["左東・右西", "阿隼隈毛"]}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 50, "rep": 1, "zh": ["：", "：", "：", "：", "：", "：", "：", "：", "：", "："], "odd": []}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 51, "rep": 0, "zh": ["：", "：", "：", "：", "：", "：", "：", "：", "：", "：", "：", "：", "：", "：", "：", "：", "："], "odd": ["フライティングバイキング", "-market", "九紛", "テディベコ", "シー fen", "OTHER"]}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 51, "rep": 1, "zh": ["：", "：", "：", "：", "：", "：", "：", "：", "：", "：", "：", "：", "：", "：", "：", "：", "：", "：", "：", "：", "：", "：", "：", "：", "：", "：", "：", "：", "：", "：", "：", "：", "：", "：", "！"], "odd": ["煎餅オムツ", "九紛", "宮原眼科楽園", "Nacional", "台中肉員", "コミュン", "宮原眼科楽園", "コミュン"]}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 52, "rep": 0, "zh": [], "odd": ["リスキリティ", "所得支え", "variable"]}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 52, "rep": 1, "zh": [], "odd": ["構造的不失業"]}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 53, "rep": 0, "zh": [], "odd": ["many自治体", "構造問題Addressし"]}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 53, "rep": 1, "zh": [], "odd": ["アナログスイッチ", "二期一会", "マイ・ポータル"]}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 54, "rep": 0, "zh": ["給與", "給與", "給與", "給與"], "odd": ["世代間家計比率"]}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 54, "rep": 1, "zh": [], "odd": []}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 55, "rep": 0, "zh": ["："], "odd": ["原子力の分裂"]}
+{"round": 4, "cond": "rule-a-minp0.05", "prompt": 55, "rep": 1, "zh": ["：", "："], "odd": ["クロニカール"]}
